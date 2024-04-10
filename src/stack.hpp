@@ -50,6 +50,8 @@ void pop_all(Stack & stk){
     while (!stk.isEmpty()) {
         cout << stk.pop();
     }
+
+	cout << endl;
 }
 
 
