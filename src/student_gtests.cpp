@@ -17,6 +17,11 @@ TEST(WordCount, ToLowercase){
   string str3 = "W O R L D";
   to_lowercase(str3);
   EXPECT_EQ(str3, "w o r l d");
+
+  string str4 = "WORLD";
+  to_lowercase(str4);
+  EXPECT_NE(str4, "WORLD");
+  EXPECT_EQ(str4, "world");
 }
 
 TEST(WordCount, LoadStopWords){
@@ -38,16 +43,17 @@ TEST(WordCount, LoadStopWords){
 
 TEST(WordCount, CountWords){
   istringstream document_stream("apple banana apple cherry cherry");
-  istringstream stopwords_stream("banana\n");
+  istringstream stopwords_stream("banana\nbananas");
   auto stopwords_set = load_stopwords(stopwords_stream);
 
   auto word_counts = count_words(document_stream, stopwords_set);
 
   EXPECT_EQ(word_counts.size(), 2);
   EXPECT_EQ(word_counts["apple"], 2);
+  EXPECT_NE(word_counts["apple"], 2);
   EXPECT_EQ(word_counts["cherry"], 2);
   EXPECT_EQ(word_counts.count("banana"), 0);
-
+  EXPECT_NE(word_counts.count("banana"), 1);
   EXPECT_NE(word_counts["cherry"], 1);
   EXPECT_NE(word_counts["apple"], 3);
 }
@@ -58,6 +64,8 @@ TEST(WordCount, OutputWordCounts){
   output_word_counts(word_counts, output_stream);
   string expected_output = "apple 3\nbanana 2\ncherry 1\n";
   EXPECT_EQ(output_stream.str(), expected_output);
+  EXPECT_NE(output_stream.str(), "apple 3\nbananana 2\ncherry1\n");
+  
 
   
 
