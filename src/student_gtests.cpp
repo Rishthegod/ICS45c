@@ -42,7 +42,7 @@ TEST(WordCount, LoadStopWords){
 }
 
 TEST(WordCount, CountWords){
-  istringstream document_stream("apple banana apple cherry cherry");
+  istringstream document_stream("apple banana Apple cherry cherry");
   istringstream stopwords_stream("banana\nbananas");
   auto stopwords_set = load_stopwords(stopwords_stream);
 
@@ -50,10 +50,11 @@ TEST(WordCount, CountWords){
 
   EXPECT_EQ(word_counts.size(), 2);
   EXPECT_EQ(word_counts["apple"], 2);
-  EXPECT_NE(word_counts["apple"], 2);
+  EXPECT_NE(word_counts["apple"], 0);
+  EXPECT_EQ(word_counts["Apple"], 0);
   EXPECT_EQ(word_counts["cherry"], 2);
   EXPECT_EQ(word_counts.count("banana"), 0);
-  EXPECT_NE(word_counts.count("banana"), 1);
+  EXPECT_NE(word_counts.count("bananas"), 1);
   EXPECT_NE(word_counts["cherry"], 1);
   EXPECT_NE(word_counts["apple"], 3);
 }
