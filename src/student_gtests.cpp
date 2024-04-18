@@ -23,13 +23,17 @@ TEST(WordCount, LoadStopWords){
   istringstream stopwords_stream("is\nthe\nand\ngoodbye earth");
   auto stopwords_set = load_stopwords(stopwords_stream);
 
-  EXPECT_EQ(stopwords_set.size(),5);
+  EXPECT_EQ(stopwords_set.size(), 5);
   EXPECT_TRUE(stopwords_set.count("is"));
   EXPECT_TRUE(stopwords_set.count("the"));
   EXPECT_TRUE(stopwords_set.count("and"));
   EXPECT_FALSE(stopwords_set.count("not"));
   EXPECT_FALSE(stopwords_set.count("hello"));
   EXPECT_TRUE(stopwords_set.count("earth"));
+
+  istringstream empty_stopwords_stream("");
+  auto empty_stopwords_set = load_stopwords(empty_stopwords_stream);
+  EXPECT_EQ(empty_stopwords_set.size(), 0);
 }
 
 TEST(WordCount, CountWords){
@@ -43,6 +47,9 @@ TEST(WordCount, CountWords){
   EXPECT_EQ(word_counts["apple"], 2);
   EXPECT_EQ(word_counts["cherry"], 2);
   EXPECT_EQ(word_counts.count("banana"), 0);
+
+  EXPECT_NE(word_counts["cherry"], 1);
+  EXPECT_NE(word_counts["apple"], 3);
 }
 
 TEST(WordCount, OutputWordCounts){
@@ -52,5 +59,9 @@ TEST(WordCount, OutputWordCounts){
   string expected_output = "apple 3\nbanana 2\ncherry 1\n";
   EXPECT_EQ(output_stream.str(), expected_output);
 
-  
+  std::ostringstream buggy_output_stream;
+  output_word_counts(word_counts, buggy_output_stream);
+  std::string buggy_expected_output = "apple:3,banana:2,cherry:1";
+  EXPECT_EQ(buggy_output_stream.str(), buggy_expected_output);
+
 }
