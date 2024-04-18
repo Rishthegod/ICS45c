@@ -22,10 +22,12 @@ TEST(WordCount, ToLowercase){
   to_lowercase(str4);
   EXPECT_NE(str4, "WORLD");
   EXPECT_EQ(str4, "world");
+
+  
 }
 
 TEST(WordCount, LoadStopWords){
-  istringstream stopwords_stream("is\nthe\nand\ngoodbye earth");
+  istringstream stopwords_stream("is\nthe\nand\ngoodbye                   earth");
   auto stopwords_set = load_stopwords(stopwords_stream);
 
   EXPECT_EQ(stopwords_set.size(), 5);
@@ -34,6 +36,7 @@ TEST(WordCount, LoadStopWords){
   EXPECT_TRUE(stopwords_set.count("and"));
   EXPECT_FALSE(stopwords_set.count("not"));
   EXPECT_FALSE(stopwords_set.count("hello"));
+  EXPECT_FALSE(stopwords_set.count(" "));
   EXPECT_TRUE(stopwords_set.count("earth"));
 
   istringstream empty_stopwords_stream("");
@@ -42,7 +45,7 @@ TEST(WordCount, LoadStopWords){
 }
 
 TEST(WordCount, CountWords){
-  istringstream document_stream("apple banana Apple cherry cherry");
+  istringstream document_stream("apple banana Apple cherry      cherry");
   istringstream stopwords_stream("banana\nbananas");
   auto stopwords_set = load_stopwords(stopwords_stream);
 
@@ -52,6 +55,7 @@ TEST(WordCount, CountWords){
   EXPECT_EQ(word_counts["apple"], 2);
   EXPECT_NE(word_counts["apple"], 0);
   EXPECT_EQ(word_counts["Apple"], 0);
+  EXPECT_EQ(word_counts[" "], 0);
   EXPECT_EQ(word_counts["cherry"], 2);
   EXPECT_EQ(word_counts.count("banana"), 0);
   EXPECT_NE(word_counts.count("bananas"), 1);

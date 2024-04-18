@@ -19,7 +19,7 @@ Coins Coins::extract_exact_change(const Coins& coins){
   if(coins.quarters <= this->quarters){
     if(coins.dimes <= this->dimes){
       if(coins.nickels <= this->nickels){
-        if(coins.nickels <= this->pennies){
+        if(coins.pennies <= this->pennies){
           this->quarters -= coins.quarters;
           this->dimes -= coins.dimes;
           this->nickels -= coins.nickels;
@@ -31,9 +31,6 @@ Coins Coins::extract_exact_change(const Coins& coins){
   }
 
   return Coins(0,0,0,0);
-
-  
-  
 }
 
 Coins coins_required_for_cents(int amount_in_cents){
