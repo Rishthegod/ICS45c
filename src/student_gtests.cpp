@@ -1,0 +1,56 @@
+#include <gtest/gtest.h>
+#include <sstream>
+#include "word_count.hpp"
+
+using namespace std;
+
+TEST(WordCount, ToLowercase){
+
+  string str1 = "HELLO EVERYONE";
+  to_lowercase(str1);
+  EXPECT_EQ(str1, "hello everyone");
+
+  string str2 = "He123llo@gmail.com";
+  to_lowercase(str2);
+  EXPECT_EQ(str2, "he123llo@gmail.com");
+
+  string str3 = "W O R L D";
+  to_lowercase(str3);
+  EXPECT_EQ(str3, "w o r l d");
+}
+
+TEST(WordCount, LoadStopWords){
+  istringstream stopwords_stream("is\nthe\nand\ngoodbye earth");
+  auto stopwords_set = load_stopwords(stopwords_stream);
+
+  EXPECT_EQ(stopwords_set.size(),5);
+  EXPECT_TRUE(stopwords_set.count("is"));
+  EXPECT_TRUE(stopwords_set.count("the"));
+  EXPECT_TRUE(stopwords_set.count("and"));
+  EXPECT_FALSE(stopwords_set.count("not"));
+  EXPECT_FALSE(stopwords_set.count("hello"));
+  EXPECT_TRUE(stopwords_set.count("earth"));
+}
+
+TEST(WordCount, CountWords){
+  istringstream document_stream("apple banana apple cherry cherry");
+  istringstream stopwords_stream("banana\n");
+  auto stopwords_set = load_stopwords(stopwords_stream);
+
+  auto word_counts = count_words(document_stream, stopwords_set);
+
+  EXPECT_EQ(word_counts.size(), 2);
+  EXPECT_EQ(word_counts["apple"], 2);
+  EXPECT_EQ(word_counts["cherry"], 2);
+  EXPECT_EQ(word_counts.count("banana"), 0);
+}
+
+TEST(WordCount, OutputWordCounts){
+  map<string, int> word_counts = {{"apple", 3}, {"banana", 2}, {"cherry", 1}};
+  ostringstream output_stream;
+  output_word_counts(word_counts, output_stream);
+  string expected_output = "apple 3\nbanana 2\ncherry 1\n";
+  EXPECT_EQ(output_stream.str(), expected_output);
+
+  
+}
