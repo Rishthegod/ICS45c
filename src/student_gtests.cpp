@@ -59,9 +59,6 @@ TEST(WordCount, OutputWordCounts){
   string expected_output = "apple 3\nbanana 2\ncherry 1\n";
   EXPECT_EQ(output_stream.str(), expected_output);
 
-  std::ostringstream buggy_output_stream;
-  output_word_counts(word_counts, buggy_output_stream);
-  std::string buggy_expected_output = "apple:3,banana:2,cherry:1";
-  EXPECT_EQ(buggy_output_stream.str(), buggy_expected_output);
+  
 
 }
