@@ -79,7 +79,7 @@ TEST(WordCount, OutputWordCounts){
   word_counts2["World"] = 0;
   ostringstream output_stream2;
   output_word_counts(word_counts2, output_stream2);
-  string expected_output2 = "@asd 1\n134214 2\nHello 3\nWorld 0";
+  string expected_output2 = "134214 2\n@asd 1\nHello 3\nWorld 0\n";
   EXPECT_EQ(output_stream2.str(), expected_output2);
 
 }
