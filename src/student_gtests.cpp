@@ -60,13 +60,13 @@ TEST(WordCount, CountWords){
 }
 
 TEST(WordCount, OutputWordCounts){
-  map<string, int> word_counts = {{"apple", 3}, {"banana", 2}, {"cherry", 1}};
+  map<string, int> word_counts = {{"cherry", 1},{"banana", 2},{"apple", 3} };
   ostringstream output_stream;
   output_word_counts(word_counts, output_stream);
   string expected_output = "apple 3\nbanana 2\ncherry 1\n";
   EXPECT_EQ(output_stream.str(), expected_output);
   EXPECT_NE(output_stream.str(), "apple 3\nbananana 2\ncherry1\n");
-  
+  EXPECT_NE(output_stream.str(), "cherry 1\nbanana 2\napple 3");
 
   
 
