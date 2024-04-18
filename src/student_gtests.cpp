@@ -72,6 +72,14 @@ TEST(WordCount, OutputWordCounts){
   EXPECT_NE(output_stream.str(), "apple 3\nbananana 2\ncherry1\n");
   EXPECT_NE(output_stream.str(), "cherry 1\nbanana 2\napple 3");
 
-  
+  map<string, int> word_counts2;
+  word_counts2["@asd"] = 1;
+  word_counts2["134214"] = 2;
+  word_counts2["Hello"] = 3;
+  word_counts2["World"] = 0;
+  ostringstream output_stream2;
+  output_word_counts(word_counts2, output_stream2);
+  string expected_output2 = "@asd 1\n134214 2\nHello 3\nWorld 0";
+  EXPECT_EQ(output_stream2.str(), expected_output2);
 
 }
