@@ -223,7 +223,7 @@ const char* String::strchr(const char* str, char c) {
         if (*str == c) {
             return str;
         }
-        str++;
+        ++str;
     }
     return nullptr; // Character not found
 }

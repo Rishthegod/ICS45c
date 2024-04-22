@@ -55,8 +55,8 @@ TEST(StringFunction, strncmp) {
   const char *str1 = "Hello";
   const char *str2 = "Hel";
   EXPECT_EQ(String::strncmp(str1, str2, 3), 0);
-  EXPECT_GT(String::strncmp("hello", "world", 3), 0);
-  EXPECT_LT(String::strncmp("world", "hello", 3), 0);
+  EXPECT_LT(String::strncmp("hello", "world", 3), 0);
+  EXPECT_GT(String::strncmp("world", "hello", 3), 0);
 }
 
 // Test for static helper method reverse_cpy()
@@ -102,7 +102,7 @@ TEST(StringFunction, strstr) {
   const char *haystack6 = "hello!@#$%^world";
   const char *needle6 = "!@#$%^";
   const char *result6 = String::strstr(haystack6, needle6);
-  EXPECT_EQ(result6, haystack6 + 6);
+  EXPECT_EQ(result6, haystack6 + 5);
 
   const char *haystack7 = "hello world";
   const char *needle7 = " ";
