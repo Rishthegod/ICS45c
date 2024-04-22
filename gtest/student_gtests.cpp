@@ -1,257 +1,111 @@
-#include <iostream>
-
-using namespace std;
-
 #include "string.hpp"
+#include "gtest/gtest.h"
 
-String::String(const char* s) {
-    if (strlen(s) >= MAXLEN) {
-        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
-        
-        strncpy(buf, s, MAXLEN - 1);
-        buf[MAXLEN - 1] = '\0'; 
-    } else {
-        strcpy(buf, s);
-    }
+// Test for static helper method strlen()
+TEST(StringFunction, strlen) {
+  const char *str = "Hello";
+  EXPECT_EQ(String::strlen(str), 5);
 }
 
-String::String(const String& s) {
-    strncpy(buf, s.buf, MAXLEN - 1);
+// Test for static helper method strcpy()
+TEST(StringFunction, strcpy) {
+  const char *src = "Hello";
+  char dest[10];
+  String::strcpy(dest, src);
+  EXPECT_STREQ(dest, "Hello");
 }
 
-String& String::operator=(const String& s) {
-    if (this != &s) {
-        if (s.size() >= MAXLEN) {
-            std::cout << "ERROR: String Capacity Exceeded" << std::endl;
-            
-            strncpy(buf, s.buf, MAXLEN - 1);
-            buf[MAXLEN - 1] = '\0'; 
-        } else {
-            strcpy(buf, s.buf);
-        }
-    }
-    return *this;
+// Test for static helper method strncpy()
+TEST(StringFunction, strncpy) {
+  const char *src = "Hello";
+  char dest[10];
+  String::strncpy(dest, src, 3);
+  EXPECT_STREQ(dest, "Hel");
 }
 
-char& String::operator[](int index) {
-    if (index < 0 || index >= strlen(buf)) {
-        std::cout << "ERROR: Index Out Of Bounds" << std::endl;
-        return buf[0];
-    }
-    return buf[index];
+// Test for static helper method strcat()
+TEST(StringFunction, strcat) {
+  char dest[12] = "Hello";
+  const char *src = " World";
+  String::strcat(dest, src);
+  EXPECT_STREQ(dest, "Hello World");
 }
 
-int String::size() const{
-    return strlen(buf);
+// Test for static helper method strncat()
+TEST(StringFunction, strncat) {
+  char dest[10] = "Hello";
+  const char *src = " World";
+  String::strncat(dest, src, 3);
+  EXPECT_STREQ(dest, "Hello Wo");
 }
 
-String String::reverse() {
-    char reversed[MAXLEN];
-    reverse_cpy(reversed, buf);
-    return String(reversed);
+// Test for static helper method strcmp()
+TEST(StringFunction, strcmp) {
+  const char *str1 = "Hello";
+  const char *str2 = "Hello";
+  EXPECT_EQ(String::strcmp(str1, str2), 0);
+  const char *str3 = "world";
+  EXPECT_LT(String::strcmp(str1, str3), 0);
+  const char *str4 = "Apple"; 
+  EXPECT_GT(String::strcmp(str1, str4), 0);
 }
 
-int String::indexOf(char c) {
-    const char* result = strchr(buf, c);
-    if (result == nullptr) {
-        return -1; // Character not found
-    }
-    return result - buf; // Calculate index of character
+// Test for static helper method strncmp()
+TEST(StringFunction, strncmp) {
+  const char *str1 = "Hello";
+  const char *str2 = "Hel";
+  EXPECT_EQ(String::strncmp(str1, str2, 3), 0);
+  EXPECT_GT(String::strncmp("hello", "world", 3), 0);
+  EXPECT_LT(String::strncmp("world", "hello", 3), 0);
 }
 
-int String::indexOf(const String& s) {
-    const char* result = strstr(buf, s.buf);
-    if (result == nullptr) {
-        return -1; // Substring not found
-    }
-    return result - buf; // Calculate index of substring
+// Test for static helper method reverse_cpy()
+TEST(StringFunction, reverse_cpy) {
+  const char *src = "Hello";
+  char dest[10];
+  String::reverse_cpy(dest, src);
+  EXPECT_STREQ(dest, "olleH");
 }
 
-bool String::operator==(const String& s) const {
-    return strcmp(buf, s.buf) == 0;
+// Test for static helper method strchr()
+TEST(StringFunction, strchr) {
+  const char *str = "Hello";
+  char c = 'e';
+  const char *result = String::strchr(str, c);
+  EXPECT_EQ(result, str + 1);
 }
 
-bool String::operator!=(const String& s) const {
-    return strcmp(buf, s.buf) != 0;
+// Test for static helper method strstr()
+TEST(StringFunction, strstr) {
+  const char *haystack = "Hello World";
+  const char *needle = "World";
+  const char *result = String::strstr(haystack, needle);
+  EXPECT_EQ(result, haystack + 6);
+  const char *needle2 = "apple"; 
+  const char *result2 = String::strstr(haystack, needle2);
+  EXPECT_EQ(result2, nullptr);
+  const char *haystack3 = "";
+  const char *needle3 = "hello";
+  const char *result3 = String::strstr(haystack3, needle3);
+  EXPECT_EQ(result3, nullptr);
+
+  const char *haystack4 = "hello";
+  const char *needle4 = "";
+  const char *result4 = String::strstr(haystack4, needle4);
+  EXPECT_EQ(result4, haystack4);
+
+  const char *haystack5 = "hello";
+  const char *needle5 = "hello world";
+  const char *result5 = String::strstr(haystack5, needle5);
+  EXPECT_EQ(result5, nullptr);
+
+  const char *haystack6 = "hello!@#$%^world";
+  const char *needle6 = "!@#$%^";
+  const char *result6 = String::strstr(haystack6, needle6);
+  EXPECT_EQ(result6, haystack6 + 6);
+
+  const char *haystack7 = "hello world";
+  const char *needle7 = " ";
+  const char *result7 = String::strstr(haystack7, needle7);
+  EXPECT_EQ(result7, haystack7 + 5);
 }
-
-bool String::operator<(const String& s) const {
-    return strcmp(buf, s.buf) < 0;
-}
-
-bool String::operator>(const String& s) const {
-    return strcmp(buf, s.buf) > 0;
-}
-
-bool String::operator<=(const String& s) const {
-    return strcmp(buf, s.buf) <= 0;
-}
-
-bool String::operator>=(const String& s) const {
-    return strcmp(buf, s.buf) >= 0;
-}
-
-String String::operator+(const String& s) {
-    String result(*this);
-    if (result.size() + s.size() >= MAXLEN) {
-        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
-        // fit input into buffer
-        strncat(result.buf, s.buf, MAXLEN - result.size() - 1);
-        result.buf[MAXLEN - 1] = '\0'; //Null ternmination
-    } else {
-        strcat(result.buf, s.buf);
-    }
-    return result;
-}
-
-
-String& String::operator+=(const String& s) {
-    if (size() + s.size() >= MAXLEN) {
-        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
-        // Truncate the input 
-        strncat(buf, s.buf, MAXLEN - size() - 1);
-        buf[MAXLEN - 1] = '\0'; 
-    } else {
-        strcat(buf, s.buf);
-    }
-    return *this;
-}
-
-
-void String::print(std::ostream& out) const {
-    out << buf;
-}
-
-void String::read(std::istream& in) {
-    char temp[MAXLEN];
-    in >> temp; // Read inp temp buffer
-
-    // Check MAXLEN
-    if (strlen(temp) >= MAXLEN) {
-        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
-        // Truncate 
-        strncpy(buf, temp, MAXLEN - 1);
-        buf[MAXLEN - 1] = '\0'; 
-    } else {
-        strcpy(buf, temp);
-    }
-}
-String::~String() {
-    // Destructor
-}
-
-int String::strlen(const char* s) {
-    int len = 0;
-    while (s[len] != '\0') {
-        len++;
-    }
-    return len;
-}
-
-char* String::strcpy(char* dest, const char* src) {
-    int i = 0;
-    while (src[i] != '\0') {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return dest;
-}
-
-char* String::strncpy(char* dest, const char* src, int n) {
-    int i = 0;
-    // Copy at most n char
-    for (; i < n && src[i] != '\0'; ++i) {
-        dest[i] = src[i];
-    }
-    // Ensure null terminator
-    dest[i] = '\0';
-    return dest;
-}
-
-char* String::strcat(char* dest, const char* src) {
-    int dest_len = strlen(dest);
-    int i = 0;
-    while (src[i] != '\0') {
-        dest[dest_len + i] = src[i];
-        i++;
-    }
-    dest[dest_len + i] = '\0';
-    return dest;
-}
-
-char* String::strncat(char* dest, const char* src, int n) {
-    int dest_len = strlen(dest);
-    int i = 0;
-    while (src[i] != '\0' && i < n) {
-        dest[dest_len + i] = src[i];
-        i++;
-    }
-    dest[dest_len + i] = '\0';
-    return dest;
-}
-
-int String::strcmp(const char* left, const char* right) {
-    int i = 0;
-    while (left[i] == right[i] && left[i] != '\0' && right[i] != '\0') {
-        i++;
-    }
-    return left[i] - right[i];
-}
-
-int String::strncmp(const char* left, const char* right, int n) {
-    int i = 0;
-    while (left[i] == right[i] && left[i] != '\0' && right[i] != '\0' && i < n) {
-        i++;
-    }
-    if (i == n) {
-        return 0; // Strings are equal up to n characters
-    }
-    return left[i] - right[i];
-}
-
-void String::reverse_cpy(char* dest, const char* src) {
-    int len = strlen(src);
-    for (int i = 0; i < len; i++) {
-        dest[i] = src[len - i - 1];
-    }
-    dest[len] = '\0';
-}
-
-const char* String::strchr(const char* str, char c) {
-    while (*str != '\0') {
-        if (*str == c) {
-            return str;
-        }
-        str++;
-    }
-    return nullptr; // Character not found
-}
-
-const char* String::strstr(const char* haystack, const char* needle) {
-    while (*haystack != '\0') {
-        const char* h = haystack;
-        const char* n = needle;
-        while (*h != '\0' && *n != '\0' && *h == *n) {
-            h++;
-            n++;
-        }
-        if (*n == '\0') {
-            return haystack; // Found the substring
-        }
-        haystack++;
-    }
-    return nullptr; // Substring not found
-}
-
-std::ostream& operator<<(std::ostream& out, const String& s) {
-    s.print(out);
-    return out;
-}
-
-std::istream& operator>>(std::istream& in, String& s) {
-    s.read(in);
-    return in;
-}
-
-
