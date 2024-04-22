@@ -46,8 +46,8 @@ TEST(StringFunction, strcmp) {
   EXPECT_EQ(String::strcmp(str1, str2), 0);
   const char *str3 = "world";
   EXPECT_LT(String::strcmp(str1, str3), 0);
-  const char *str3 = "Apple";
-  EXPECT_GT(String::strcmp(str1, str3), 0);
+  const char *str4 = "Apple"; 
+  EXPECT_GT(String::strcmp(str1, str4), 0);
 }
 
 // Test for static helper method strncmp()
