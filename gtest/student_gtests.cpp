@@ -2,13 +2,13 @@
 #include "string.hpp"
 
 // Test for static helper method strlen()
-TEST(StringStaticHelpers, Strlen) {
+TEST(StringFunction, strlen) {
     const char* str = "Hello";
     EXPECT_EQ(String::strlen(str), 5);
 }
 
 // Test for static helper method strcpy()
-TEST(StringStaticHelpers, Strcpy) {
+TEST(StringFunction, strcpy) {
     const char* src = "Hello";
     char dest[10];
     String::strcpy(dest, src);
@@ -16,7 +16,7 @@ TEST(StringStaticHelpers, Strcpy) {
 }
 
 // Test for static helper method strncpy()
-TEST(StringStaticHelpers, Strncpy) {
+TEST(StringFunction, strncpy) {
     const char* src = "Hello";
     char dest[10];
     String::strncpy(dest, src, 3);
@@ -24,7 +24,7 @@ TEST(StringStaticHelpers, Strncpy) {
 }
 
 // Test for static helper method strcat()
-TEST(StringStaticHelpers, Strcat) {
+TEST(StringFunction, strcat) {
     char dest[12] = "Hello";
     const char* src = " World";
     String::strcat(dest, src);
@@ -32,7 +32,7 @@ TEST(StringStaticHelpers, Strcat) {
 }
 
 // Test for static helper method strncat()
-TEST(StringStaticHelpers, Strncat) {
+TEST(StringFunction, strncat) {
     char dest[10] = "Hello";
     const char* src = " World";
     String::strncat(dest, src, 3);
@@ -40,21 +40,21 @@ TEST(StringStaticHelpers, Strncat) {
 }
 
 // Test for static helper method strcmp()
-TEST(StringStaticHelpers, Strcmp) {
+TEST(StringFunction, strcmp) {
     const char* str1 = "Hello";
     const char* str2 = "Hello";
     EXPECT_EQ(String::strcmp(str1, str2), 0);
 }
 
 // Test for static helper method strncmp()
-TEST(StringStaticHelpers, Strncmp) {
+TEST(StringFunction, strncmp) {
     const char* str1 = "Hello";
     const char* str2 = "Hel";
     EXPECT_EQ(String::strncmp(str1, str2, 3), 0);
 }
 
 // Test for static helper method reverse_cpy()
-TEST(StringStaticHelpers, ReverseCpy) {
+TEST(StringFunction, reverse_cpy) {
     const char* src = "Hello";
     char dest[10];
     String::reverse_cpy(dest, src);
@@ -62,7 +62,7 @@ TEST(StringStaticHelpers, ReverseCpy) {
 }
 
 // Test for static helper method strchr()
-TEST(StringStaticHelpers, Strchr) {
+TEST(StringFunction, strchr) {
     const char* str = "Hello";
     char c = 'e';
     const char* result = String::strchr(str, c);
@@ -70,7 +70,7 @@ TEST(StringStaticHelpers, Strchr) {
 }
 
 // Test for static helper method strstr()
-TEST(StringStaticHelpers, Strstr) {
+TEST(StringFunction, strstr) {
     const char* haystack = "Hello World";
     const char* needle = "World";
     const char* result = String::strstr(haystack, needle);
