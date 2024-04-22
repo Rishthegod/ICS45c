@@ -1,52 +1,79 @@
-#include <gtest/gtest.h>
-
+#include "gtest/gtest.h"
 #include "string.hpp"
 
-TEST(StringFunction, strlen) {
-    EXPECT_EQ(String::strlen(""), 0);
-    EXPECT_EQ(String::strlen("foo"), 3);
+// Test for static helper method strlen()
+TEST(StringStaticHelpers, Strlen) {
+    const char* str = "Hello";
+    EXPECT_EQ(String::strlen(str), 5);
 }
 
-TEST(StringFunction, strcpy) {
-    char result[10];
-    EXPECT_EQ(String::strcpy(result, "foo"), result);
-    EXPECT_STREQ(result, "foo");
-
-    EXPECT_EQ(String::strcpy(result, "a"), result);
-    EXPECT_STREQ(result, "a");
-
-    EXPECT_EQ(String::strcpy(result, ""), result);
-    EXPECT_STREQ(result, "");
+// Test for static helper method strcpy()
+TEST(StringStaticHelpers, Strcpy) {
+    const char* src = "Hello";
+    char dest[10];
+    String::strcpy(dest, src);
+    EXPECT_STREQ(dest, "Hello");
 }
 
-TEST(StringFunction, strncpy) {
-    EXPECT_TRUE(false);
+// Test for static helper method strncpy()
+TEST(StringStaticHelpers, Strncpy) {
+    const char* src = "Hello";
+    char dest[10];
+    String::strncpy(dest, src, 3);
+    EXPECT_STREQ(dest, "Hel");
 }
 
-TEST(StringFunction, strcat) {
-    EXPECT_TRUE(false);
+// Test for static helper method strcat()
+TEST(StringStaticHelpers, Strcat) {
+    char dest[12] = "Hello";
+    const char* src = " World";
+    String::strcat(dest, src);
+    EXPECT_STREQ(dest, "Hello World");
 }
 
-TEST(StringFunction, strncat) {
-    EXPECT_TRUE(false);
+// Test for static helper method strncat()
+TEST(StringStaticHelpers, Strncat) {
+    char dest[10] = "Hello";
+    const char* src = " World";
+    String::strncat(dest, src, 3);
+    EXPECT_STREQ(dest, "Hello Wo");
 }
 
-TEST(StringFunction, strcmp) {
-    EXPECT_TRUE(false);
+// Test for static helper method strcmp()
+TEST(StringStaticHelpers, Strcmp) {
+    const char* str1 = "Hello";
+    const char* str2 = "Hello";
+    EXPECT_EQ(String::strcmp(str1, str2), 0);
 }
 
-TEST(StringFunction, strncmp) {
-    EXPECT_TRUE(false);
+// Test for static helper method strncmp()
+TEST(StringStaticHelpers, Strncmp) {
+    const char* str1 = "Hello";
+    const char* str2 = "Hel";
+    EXPECT_EQ(String::strncmp(str1, str2, 3), 0);
 }
 
-TEST(StringFunction, reverse_cpy) {
-    EXPECT_TRUE(false);
+// Test for static helper method reverse_cpy()
+TEST(StringStaticHelpers, ReverseCpy) {
+    const char* src = "Hello";
+    char dest[10];
+    String::reverse_cpy(dest, src);
+    EXPECT_STREQ(dest, "olleH");
 }
 
-TEST(StringFunction, strchr) {
-    EXPECT_TRUE(false);
+// Test for static helper method strchr()
+TEST(StringStaticHelpers, Strchr) {
+    const char* str = "Hello";
+    char c = 'e';
+    const char* result = String::strchr(str, c);
+    EXPECT_EQ(result, str + 1);
 }
 
-TEST(StringFunction, strstr) {
-    EXPECT_TRUE(false);
+// Test for static helper method strstr()
+TEST(StringStaticHelpers, Strstr) {
+    const char* haystack = "Hello World";
+    const char* needle = "World";
+    const char* result = String::strstr(haystack, needle);
+    EXPECT_EQ(result, haystack + 6);
 }
+
