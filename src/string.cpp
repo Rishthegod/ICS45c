@@ -6,7 +6,7 @@ using namespace std;
 
 String::String(const char* s) {
     if (strlen(s) >= MAXLEN) {
-        std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
         
         strncpy(buf, s, MAXLEN - 1);
         buf[MAXLEN - 1] = '\0'; 
@@ -22,7 +22,7 @@ String::String(const String& s) {
 String& String::operator=(const String& s) {
     if (this != &s) {
         if (s.size() >= MAXLEN) {
-            std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+            std::cout << "ERROR: String Capacity Exceeded" << std::endl;
             
             strncpy(buf, s.buf, MAXLEN - 1);
             buf[MAXLEN - 1] = '\0'; 
@@ -35,7 +35,7 @@ String& String::operator=(const String& s) {
 
 char& String::operator[](int index) {
     if (index < 0 || index >= strlen(buf)) {
-        std::cerr << "ERROR: Index Out Of Bounds" << std::endl;
+        std::cout << "ERROR: Index Out Of Bounds" << std::endl;
         return buf[0];
     }
     return buf[index];
@@ -94,10 +94,10 @@ bool String::operator>=(const String& s) const {
 String String::operator+(const String& s) {
     String result(*this);
     if (result.size() + s.size() >= MAXLEN) {
-        std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
-        // Truncate the input string to fit into the buffer
+        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
+        // fit input into buffer
         strncat(result.buf, s.buf, MAXLEN - result.size() - 1);
-        result.buf[MAXLEN - 1] = '\0'; // Ensure null termination
+        result.buf[MAXLEN - 1] = '\0'; //Null ternmination
     } else {
         strcat(result.buf, s.buf);
     }
@@ -107,7 +107,7 @@ String String::operator+(const String& s) {
 
 String& String::operator+=(const String& s) {
     if (size() + s.size() >= MAXLEN) {
-        std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
         // Truncate the input 
         strncat(buf, s.buf, MAXLEN - size() - 1);
         buf[MAXLEN - 1] = '\0'; 
@@ -128,7 +128,7 @@ void String::read(std::istream& in) {
 
     // Check MAXLEN
     if (strlen(temp) >= MAXLEN) {
-        std::cerr << "ERROR: String Capacity Exceeded" << std::endl;
+        std::cout << "ERROR: String Capacity Exceeded" << std::endl;
         // Truncate 
         strncpy(buf, temp, MAXLEN - 1);
         buf[MAXLEN - 1] = '\0'; 
