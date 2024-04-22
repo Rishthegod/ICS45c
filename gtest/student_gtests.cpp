@@ -81,8 +81,8 @@ TEST(StringFunction, strstr) {
   const char *needle = "World";
   const char *result = String::strstr(haystack, needle);
   EXPECT_EQ(result, haystack + 6);
-  const char *needle2 = "apple" const char *result2 =
-      String::strstr(haystack, needle2);
+  const char *needle2 = "apple" 
+  const char *result2 = String::strstr(haystack, needle2);
   EXPECT_EQ(result2, nullptr);
   const char *haystack3 = "";
   const char *needle3 = "hello";
