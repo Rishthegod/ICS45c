@@ -92,16 +92,16 @@ bool String::operator>=(const String& s) const {
 }
 
 String String::operator+(const String& s) {
-    String result(*this);
-    if (result.size() + s.size() >= MAXLEN) {
+    
+    if (size() + s.size() >= MAXLEN) {
         std::cout << "ERROR: String Capacity Exceeded" << std::endl;
         // fit input into buffer
-        strncat(result.buf, s.buf, MAXLEN - result.size() - 1);
-        result.buf[MAXLEN - 1] = '\0'; //Null ternmination
+        strncat(buf, s.buf, MAXLEN - size() - 1);
+        buf[MAXLEN - 1] = '\0'; //Null ternmination
     } else {
-        strcat(result.buf, s.buf);
+        strcat(buf, s.buf);
     }
-    return result;
+    return *this;
 }
 
 
@@ -219,6 +219,9 @@ void String::reverse_cpy(char* dest, const char* src) {
 }
 
 const char* String::strchr(const char* str, char c) {
+    if(c=='\0'){
+      return str +strlen(str);
+    }
     while (*str != '\0') {
         if (*str == c) {
             return str;

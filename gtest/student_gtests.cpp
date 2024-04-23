@@ -54,9 +54,17 @@ TEST(StringFunction, strcmp) {
 TEST(StringFunction, strncmp) {
   const char *str1 = "Hello";
   const char *str2 = "Hel";
+  const char* empty = "";
   EXPECT_EQ(String::strncmp(str1, str2, 3), 0);
   EXPECT_LT(String::strncmp("hello", "world", 3), 0);
   EXPECT_GT(String::strncmp("world", "hello", 3), 0);
+  EXPECT_LT(String::strncmp(empty, "abc", 2), 0);
+  EXPECT_EQ(String::strncmp(str1, str2, -1), 0);
+  EXPECT_EQ(String::strncmp(str1, str2, 6), 0);
+
+  
+  
+  
 }
 
 // Test for static helper method reverse_cpy()
