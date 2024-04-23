@@ -92,16 +92,16 @@ bool String::operator>=(const String& s) const {
 }
 
 String String::operator+(const String& s) {
-    
-    if (size() + s.size() >= MAXLEN) {
+    String result(*this);
+    if (result.size() + s.size() >= MAXLEN) {
         std::cout << "ERROR: String Capacity Exceeded" << std::endl;
         // fit input into buffer
-        strncat(buf, s.buf, MAXLEN - size() - 1);
-        buf[MAXLEN - 1] = '\0'; //Null ternmination
+        strncat(result.buf, s.buf, MAXLEN - result.size() - 1);
+      result.buf[MAXLEN - 1] = '\0'; //Null ternmination
     } else {
-        strcat(buf, s.buf);
+        strcat(result.buf, s.buf);
     }
-    return *this;
+    return result;
 }
 
 

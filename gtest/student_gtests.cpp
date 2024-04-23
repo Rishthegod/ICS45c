@@ -60,7 +60,7 @@ TEST(StringFunction, strncmp) {
   EXPECT_GT(String::strncmp("world", "hello", 3), 0);
   EXPECT_LT(String::strncmp(empty, "abc", 2), 0);
   EXPECT_EQ(String::strncmp(str1, str2, -1), 0);
-  EXPECT_EQ(String::strncmp(str1, str2, 6), 0);
+  EXPECT_GT(String::strncmp(str1, str2, 6), 0);
 
   
   
