@@ -29,7 +29,7 @@ public:
   int indexOf(char c) const;
 
   // returns index into this string for first occurence of s
-  int indexOf(const String &s);
+  int indexOf(const String &s) const;
 
   // relational operators for comparing this strings to another string
   bool operator== (const String &s) const;
