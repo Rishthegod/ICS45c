@@ -23,10 +23,10 @@ public:
   int size() const;
 
   // returns a reversal of this string. does not modify this string
-  String reverse();
+  String reverse() const;
 
   // returns index into this string for the first occurence of c
-  int indexOf(char c);
+  int indexOf(char c) const;
 
   // returns index into this string for first occurence of s
   int indexOf(const String &s);
@@ -40,7 +40,7 @@ public:
   bool operator>= (const String &s) const;
 
   // concatenation operator for appending one string to another
-  String operator+ (const String &s);
+  String operator+ (const String &s) const;
 
   // concatenate s onto the end of this string
   String &operator+= (const String &s);
@@ -55,7 +55,7 @@ public:
   //destructor for this string
   ~String();
 
-  bool in_bounds(int i) { 
+  bool in_bounds(int i) const{ 
     return i>0 && i<strlen(buf);
   }
 

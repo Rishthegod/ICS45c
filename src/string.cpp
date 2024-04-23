@@ -45,7 +45,7 @@ int String::size() const{
     return strlen(buf);
 }
 
-String String::reverse() {
+String String::reverse() const{
     char reversed[MAXLEN];
     reverse_cpy(reversed, buf);
     return String(reversed);
@@ -59,7 +59,7 @@ int String::indexOf(char c) {
     return result - buf; // Calculate index of character
 }
 
-int String::indexOf(const String& s) {
+int String::indexOf(const String& s) const{
     const char* result = strstr(buf, s.buf);
     if (result == nullptr) {
         return -1; // Substring not found
@@ -91,7 +91,7 @@ bool String::operator>=(const String& s) const {
     return strcmp(buf, s.buf) >= 0;
 }
 
-String String::operator+(const String& s) {
+String String::operator+(const String& s) const{
     String result(*this);
     if (result.size() + s.size() >= MAXLEN) {
         std::cout << "ERROR: String Capacity Exceeded" << std::endl;
@@ -105,7 +105,7 @@ String String::operator+(const String& s) {
 }
 
 
-String& String::operator+=(const String& s) {
+String& String::operator+=(const String& s){
     if (size() + s.size() >= MAXLEN) {
         std::cout << "ERROR: String Capacity Exceeded" << std::endl;
         // Truncate the input 
