@@ -51,7 +51,7 @@ String String::reverse() const{
     return String(reversed);
 }
 
-int String::indexOf(char c) {
+int String::indexOf(char c) const{
     const char* result = strchr(buf, c);
     if (result == nullptr) {
         return -1; // Character not found
