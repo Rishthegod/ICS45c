@@ -112,7 +112,9 @@ String& String::operator+=(const String& s){
         strncat(buf, s.buf, MAXLEN - size() - 1);
         buf[MAXLEN - 1] = '\0'; 
     } else {
-        strcat(buf, s.buf);
+        String result;
+        strcpy(result.buf, s.buf);
+        strcat(this->buf, result.buf);
     }
     return *this;
 }
