@@ -24,13 +24,10 @@ String::String(String&& s) {
 }
 
 String& String::operator=(String && s){
-    if(this != &s){
-      delete[] buf;
-      buf = s.buf;
-      
-    }
-    s.buf = nullptr;
-    return *this;
+  delete[] buf;
+  buf = strdup(s.buf); 
+  s.buf = nullptr; 
+  return *this;
 }
 
 String::~String(){
@@ -123,7 +120,7 @@ bool String::operator>=(const String &s) const {
 String String::operator+(const String &s) const{
   int len =  size() + s.size()+1;
   String result(len);
-  strcat(result.buf, buf);
+  strcpy(result.buf, buf);
   strcat(result.buf, s.buf);
   return result;
 }
