@@ -9,7 +9,7 @@ String::String(const char*s){
 }
 
 String::String(int length){
-  buf = new char[length+1];
+  buf = new char[length];
 }
 
 String::String(const String& s){
@@ -44,8 +44,10 @@ void String::swap(String& s)
 }
 
 String & String::operator=(const String &s){
+  if(this != &s){
   delete[] buf; 
   buf = strdup(s.buf);
+  return *this;}
   return *this;
 }
 
@@ -70,7 +72,7 @@ int String::size() const{
 }
 
 String String::reverse() const{
-  int length = size();
+  int length = size() +1 ;
   String result(length);
   reverse_cpy(result.buf,buf);
   return result;
@@ -119,7 +121,7 @@ bool String::operator>=(const String &s) const {
 }
 
 String String::operator+(const String &s) const{
-  int len =  size() + s.size();
+  int len =  size() + s.size()+1;
   String result(len);
   strcat(result.buf, buf);
   strcat(result.buf, s.buf);
