@@ -11,13 +11,19 @@ public:
     // construct this string as a copy of string s
     String(const String &s);
 
+    // Move constructor
+    String(String&& s);
+
+    // Move assignment operator
+    String& operator=(String&& s);
+
     // construct this string by moving from string s
     // String(String &&s);
     // swap buf between this string and s using std::swap, explained later
     void swap(String &s);
 
     // assignment operator from one string, s, to this string
-    String &operator=(String s);
+    String &operator=(const String &s);
 
     // assign to this string by moving from string s
     // String &operator=(String &&s);
@@ -37,21 +43,21 @@ public:
     int indexOf(char c) const;
 
     // returns index into this string for first occurrence of s
-    int indexOf(String s) const;
+    int indexOf(const String &s) const;
 
     // relational operators for comparing this strings to another string
-    bool operator==(String s) const;
-    bool operator!=(String s) const;
-    bool operator>(String s) const;
-    bool operator<(String s) const;
-    bool operator<=(String s) const;
-    bool operator>=(String s) const;
+    bool operator==(const String &s) const;
+    bool operator!=(const String &s) const;
+    bool operator>(const String &s) const;
+    bool operator<(const String &s) const;
+    bool operator<=(const String &s) const;
+    bool operator>=(const String &s) const;
 
     // concatenate this and s to form a return string
-    String operator+(String s) const;
+    String operator+(const String &s) const;
 
     // concatenate s onto the end of this string
-    String &operator+=(String s);
+    String &operator+=(const String &s);
 
     // print this string, hint: use operator << to send buf to out
     void print(std::ostream &out) const;
@@ -71,7 +77,7 @@ public:
     // but are made public so that you (and the autograder) can test them.
     static int strlen(const char *s);
     static char *strcpy(char *dest, const char *src);
-    static char *strdup(const char *src);
+    static char *strdup(const char *src); //not made yet
     static char *strncpy(char *dest, const char *src, int n);
     static char *strcat(char *dest, const char *src);
     static char *strncat(char *dest, const char *src, int n);
@@ -93,6 +99,6 @@ private:
     explicit String(int length);
 };
 
-std::ostream &operator<<(std::ostream &out, String s);
+std::ostream &operator<<(std::ostream &out, const String& s);
 std::istream &operator>>(std::istream &in, String &s);
 #endif
