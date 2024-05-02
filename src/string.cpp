@@ -17,7 +17,7 @@ String::String(const String& s){
 }
 
 String::String(String&& s) {
- 
+    
     buf = s.buf;
     
     s.buf = nullptr;
@@ -25,7 +25,7 @@ String::String(String&& s) {
 
 String& String::operator=(String && s){
   delete[] buf;
-  buf = strdup(s.buf); 
+  buf = s.buf; 
   s.buf = nullptr; 
   return *this;
 }
