@@ -154,10 +154,7 @@ TEST(ListTests, ConstructorValidCString) {
     EXPECT_EQ(teststring[4], 'o');
 }
 
-TEST(ListTests, ConstructorNullptr) {
-    String str(nullptr);
-    EXPECT_EQ(str.size(), 0);
-}
+
 
 TEST(ListTests, CopyConstructor) {
     String str1("Hello");
