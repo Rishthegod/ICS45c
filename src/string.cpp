@@ -58,14 +58,17 @@ String String::reverse() const {
 }
 
 int String::indexOf(char c) const {
+    if(!this->head && !c){
+        return 0;
+    }
     list::Node* node = list::find_char(head, c);
-    if (!node){ 
-        return 0;}
+    /*if (!node){ 
+        return 0;}*/
     return list::index(head, node);
 }
 
 int String::indexOf(const String& s) const {
-    if (!this->head || !s.head){
+    if (!this->head && !s.head){
         return 0;
     }
     list::Node* node = list::find_list(this->head, s.head);
