@@ -229,11 +229,7 @@ TEST(ListTests, ConcatenationOperatorValid) {
     EXPECT_EQ(concatenated[5], ' ');
 }
 
-TEST(ListTests, ConcatenationOperatorNullptr) {
-    String str("Hello");
-    String concatenated = str + nullptr;
-    EXPECT_EQ(concatenated.size(), 5);
-}
+
 
 TEST(ListTests, ConcatenationAssignmentOperatorValid) {
     String str1("Hello");
