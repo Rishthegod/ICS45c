@@ -2,6 +2,8 @@
 
 #include "list.hpp"
 
+#include "string.hpp"
+
 using namespace std;
 using list::Node;
 
@@ -146,10 +148,10 @@ TEST(ListTests, PrintValid) {
 
 TEST(ListTests, ConstructorValidCString) {
     const char* s = "Hello";
-    String str(s);
-    EXPECT_EQ(str.size(), 5);
-    EXPECT_EQ(str[0], 'H');
-    EXPECT_EQ(str[4], 'o');
+    String teststring(s);
+    EXPECT_EQ(teststring.size(), 5);
+    EXPECT_EQ(teststring[0], 'H');
+    EXPECT_EQ(teststring[4], 'o');
 }
 
 TEST(ListTests, ConstructorNullptr) {
