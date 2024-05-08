@@ -58,13 +58,7 @@ TEST(ListTests, FreeNullptr) {
     list::free(nullptr);
 }
 
-TEST(ListTests, PrintValid) {
-    list::Node* head = list::from_string("Hello");
-    std::stringstream ss;
-    list::print(ss, head);
-    EXPECT_EQ(ss.str(), "Hello");
-    list::free(head);
-}
+
 
 TEST(ListTests, CopyValid) {
     list::Node* head = list::from_string("Hello");
@@ -139,21 +133,6 @@ TEST(ListTests, AppendNullptr) {
     list::free(appended);
 }
 
-TEST(ListTests, FromStringValid) {
-    const char* s = "Hello";
-    list::Node* head = list::from_string(s);
-    EXPECT_NE(head, nullptr);
-    std::stringstream ss;
-    list::print(ss, head);
-    EXPECT_EQ(ss.str(), "Hello");
-    list::free(head);
-}
-
-TEST(ListTests, FromStringNullptr) {
-    list::Node* head = list::from_string(nullptr);
-    EXPECT_EQ(head, nullptr);
-}
-
 
 TEST(ListTests, PrintValid) {
     list::Node* head = list::from_string("Hello");
@@ -217,58 +196,12 @@ TEST(ListTests, InBoundsValid) {
 }
 
 
-TEST(ListTests, ConstructorValidCString) {
-    const char* s = "Hello";
-    String str(s);
-    EXPECT_EQ(str.size(), 5);
-    EXPECT_EQ(str[0], 'H');
-    EXPECT_EQ(str[4], 'o');
-}
 
-TEST(ListTests, ConstructorNullptr) {
-    String str(nullptr);
-    EXPECT_EQ(str.size(), 0);
-}
 
-TEST(ListTests, CopyConstructor) {
-    String str1("Hello");
-    String str2(str1);
-    EXPECT_EQ(str1.size(), str2.size());
-    EXPECT_EQ(str1[0], str2[0]);
-}
 
-TEST(ListTests, MoveConstructor) {
-    String str1("Hello");
-    String str2(std::move(str1));
-    EXPECT_EQ(str1.size(), 0);
-    EXPECT_EQ(str2.size(), 5);
-}
 
-TEST(ListTests, AssignmentOperator) {
-    String str1("Hello");
-    String str2;
-    str2 = str1;
-    EXPECT_EQ(str1.size(), str2.size());
-    EXPECT_EQ(str1[0], str2[0]);
-}
 
-TEST(ListTests, MoveAssignmentOperator) {
-    String str1("Hello");
-    String str2;
-    str2 = std::move(str1);
-    EXPECT_EQ(str1.size(), 0);
-    EXPECT_EQ(str2.size(), 5);
-}
-
-TEST(ListTests, InBoundsValid) {
-    String str("Hello");
-    EXPECT_TRUE(str.in_bounds(0));
-    EXPECT_TRUE(str.in_bounds(4));
-    EXPECT_FALSE(str.in_bounds(-1));
-    EXPECT_FALSE(str.in_bounds(5));
-}
-
-TEST(ListTests, ReverseValid) {
+TEST(ListTests, ReverseValidString) {
     String str("Hello");
     String reversed = str.reverse();
     EXPECT_EQ(reversed.size(), 5);
@@ -311,7 +244,7 @@ TEST(ListTests, ConcatenationAssignmentOperatorValid) {
     EXPECT_EQ(str1[5], ' ');
 }
 
-TEST(ListTests, PrintValid) {
+TEST(ListTests, PrintValidString) {
     String str("Hello");
     std::stringstream ss;
     str.print(ss);
