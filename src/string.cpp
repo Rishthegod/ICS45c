@@ -9,7 +9,7 @@ String::String(const char* s) : head(list::from_string(s)) {
     
 }
 
-String::String(const String& s) : head(list::copy(head)) {
+String::String(const String& s) : head(list::copy(s.head)) {
     
 }
 
@@ -128,7 +128,7 @@ void String::read(std::istream& in) {
 }
 
 String::~String() {
-    list::free(head);
+    list::free(this->head);
 }
 
 
