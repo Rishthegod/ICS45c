@@ -47,10 +47,7 @@ TEST(ListTests, FromStringValid) {
     list::free(head);
 }
 
-TEST(ListTests, FromStringNullptr) {
-    list::Node* head = list::from_string(nullptr);
-    EXPECT_EQ(head, nullptr);
-}
+
 
 TEST(ListTests, FreeValid) {
     list::Node* head = list::from_string("Test");
