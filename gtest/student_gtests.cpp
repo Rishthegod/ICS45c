@@ -191,13 +191,13 @@ TEST(ListTests, AppendEmptyLists) {
 
 TEST(ListTests, IndexOfCharNotFound) {
     list::Node* head = list::from_string("Hello");
-    EXPECT_EQ(list::index(head, 'X'), -1);
+    EXPECT_EQ(list::find_char(head, 'X'), -1);
     list::free(head);
 }
 
 TEST(ListTests, IndexOfCharInEmptyList) {
     list::Node* head = nullptr;
-    EXPECT_EQ(list::index(head, 'H'), -1);
+    EXPECT_EQ(list::find_char(head, 'H'), -1);
 }
 
 TEST(ListTests, FindCharNotFound) {
