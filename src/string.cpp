@@ -3,21 +3,13 @@
 #include <compare>
 #include <iosfwd>
 
-// Helper function to copy list::Node to String::Node
-static list::Node* copyList(list::Node* head) {
-    return list::copy(head);
-}
 
-// Helper function to delete list::Node to avoid memory leaks
-static void deleteList(list::Node* head) {
-    list::free(head);
-}
 
 String::String(const char* s) : head(list::from_string(s)) {
     
 }
 
-String::String(const String& s) : head(copyList(s.head)) {
+String::String(const String& s) : head(list::copy(head)) {
     
 }
 
@@ -51,7 +43,7 @@ bool String::in_bounds(int index) const {
 
 char String::operator[](int index) const {
     if (!in_bounds(index)){
-        std::cout << "Error: Index out of bounds" << std::endl;
+        std::cout << "ERROR: Index out of bounds" << std::endl;
         return '\0';
     }
     return list::nth(head, index)->data;
@@ -115,8 +107,8 @@ void String::print(std::ostream& out) const {
 
 void String::read(std::istream& in) {
     // Clear existing data
-    deleteList(head);
-    head = nullptr;
+    list::free(this->head);
+    this->head = nullptr;
     // Read characters into a temporary linked list
     list::Node* tempHead = nullptr;
     list::Node* tempTail = nullptr;
@@ -132,11 +124,11 @@ void String::read(std::istream& in) {
         }
     }
     // Assign temporary linked list to this String
-    head = tempHead;
+    this->head = tempHead;
 }
 
 String::~String() {
-    deleteList(head);
+    list::free(head);
 }
 
 
