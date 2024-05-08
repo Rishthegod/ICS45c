@@ -64,9 +64,12 @@ int String::indexOf(char c) const {
 }
 
 int String::indexOf(const String& s) const {
-    list::Node* node = list::find_list(head, s.head);
-    if (!node) return -1;
-    return list::index(head, node);
+    if (!this->head || !s.head){
+        return 0;
+    }
+    list::Node* node = list::find_list(this->head, s.head);
+    //if (!node) return -1;
+    return list::index(this->head, node);
 }
 
 bool String::operator==(const String& s) const {

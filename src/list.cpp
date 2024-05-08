@@ -126,8 +126,8 @@ Node* find_char(Node* head, char c) {
 }
     
 Node* find_list(Node* haystack, Node* needle) {
-    if (!needle){ 
-        return nullptr;}
+    /*if (!needle){ 
+        return nullptr;}*/
     while (haystack) {
         Node* currhaystack = haystack;
         Node* currneedle = needle;
