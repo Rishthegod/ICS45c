@@ -208,7 +208,7 @@ TEST(ListTests, FindCharNotFound) {
 
 TEST(ListTests, FindCharInEmptyList) {
     list::Node* head = nullptr;
-    EXPECT_EQ(list::find_char(head->data, 'H'), nullptr);
+    EXPECT_EQ(list::find_char(head, 'H'), nullptr);
 }
 
 
