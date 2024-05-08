@@ -166,5 +166,4 @@ Node* last(Node* head) {
 
 
 
-} // namespace list
-
+} 

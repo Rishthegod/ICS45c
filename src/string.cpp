@@ -59,7 +59,8 @@ String String::reverse() const {
 
 int String::indexOf(char c) const {
     list::Node* node = list::find_char(head, c);
-    if (!node) return -1;
+    if (!node){ 
+        return 0;}
     return list::index(head, node);
 }
 
@@ -112,6 +113,9 @@ void String::read(std::istream& in) {
     // Clear existing data
     list::free(this->head);
     this->head = nullptr;
+    char temp[4096];
+    in >> temp;
+    this->head = list::from_string(temp);/*
     // Read characters into a temporary linked list
     list::Node* tempHead = nullptr;
     list::Node* tempTail = nullptr;
@@ -127,7 +131,7 @@ void String::read(std::istream& in) {
         }
     }
     // Assign temporary linked list to this String
-    this->head = tempHead;
+    this->head = tempHead;*/
 }
 
 String::~String() {
