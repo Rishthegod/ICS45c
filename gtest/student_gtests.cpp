@@ -202,13 +202,59 @@ TEST(ListTests, IndexOfCharInEmptyList) {
 
 TEST(ListTests, FindCharNotFound) {
     list::Node* head = list::from_string("Hello");
-    EXPECT_EQ(list::find_char(head, 'X'), nullptr);
+    EXPECT_EQ(list::find_char(head->data, 'X'), nullptr);
     list::free(head);
 }
 
 TEST(ListTests, FindCharInEmptyList) {
     list::Node* head = nullptr;
-    EXPECT_EQ(list::find_char(head, 'H'), nullptr);
+    EXPECT_EQ(list::find_char(head->data, 'H'), nullptr);
 }
 
+
+
+TEST(ListTest, NthValid) {
+    list::Node* head = list::from_string("Hello");
+    EXPECT_EQ(list::nth(head, 0)->data, 'H');
+    EXPECT_EQ(list::nth(head, 4)->data, 'o');
+    list::free(head);
+}
+
+TEST(ListTest, NthNullptr) {
+    list::Node* head = nullptr;
+    EXPECT_EQ(list::nth(head, 0), nullptr);
+}
+
+TEST(ListTest, LastValid) {
+    list::Node* head = list::from_string("Hello");
+    EXPECT_EQ(list::last(head)->data, 'o');
+    list::free(head);
+}
+
+TEST(ListTest, LastNullptr) {
+    list::Node* head = nullptr;
+    EXPECT_EQ(list::last(head), nullptr);
+}
+
+TEST(ListTest, IndexValid) {
+    list::Node* head = list::from_string("Hello");
+    list::Node* node = list::nth(head, 2);
+    EXPECT_EQ(list::index(head, node), 2);
+    list::free(head);
+}
+
+TEST(ListTest, IndexInvalidNode) {
+    list::Node* head = list::from_string("Hello");
+    list::Node* node = new list::Node{'X', nullptr};
+    EXPECT_EQ(list::index(head, node), -1);
+    delete node;
+    list::free(head);
+}
+
+TEST(ListTest, IndexNullptr) {
+    list::Node* head = nullptr;
+    list::Node* node = list::from_string("Hello");
+    EXPECT_EQ(list::index(head, node), -1);
+    list::free(node);
+}
 
