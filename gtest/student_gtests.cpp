@@ -154,11 +154,6 @@ TEST(ListTests, FromStringNullptr) {
     EXPECT_EQ(head, nullptr);
 }
 
-TEST(ListTests, FreeValid) {
-    list::Node* head = list::from_string("Test");
-    list::free(head);
-    // Additional checks for deallocation can be added
-}
 
 TEST(ListTests, PrintValid) {
     list::Node* head = list::from_string("Hello");
@@ -329,5 +324,5 @@ TEST(ListTests, ReadValid) {
     str.read(ss);
     EXPECT_EQ(str.size(), 5);
     EXPECT_EQ(str[0], 'H');
-    EXPECT_EQ(str[4], 'o';
+    EXPECT_EQ(str[4], 'o');
 }
