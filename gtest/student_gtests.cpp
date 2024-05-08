@@ -202,7 +202,7 @@ TEST(ListTests, IndexOfCharInEmptyList) {
 
 TEST(ListTests, FindCharNotFound) {
     list::Node* head = list::from_string("Hello");
-    EXPECT_EQ(list::find_char(head->data, 'X'), nullptr);
+    EXPECT_EQ(list::find_char(head, 'X'), nullptr);
     list::free(head);
 }
 
