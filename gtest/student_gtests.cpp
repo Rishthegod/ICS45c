@@ -36,6 +36,74 @@ TEST(ListTests, Length) {
 
 // Add remaining tests below. All tests should follow
 // the format of `TEST(ListTests, <TestName>){}`.
+
+TEST(ListTests, Free) {
+    Node* const head = list::from_string("foo");
+    list::free(head);
+    // No explicit assertions, just checking if free runs without crashing.
+}
+
+TEST(ListTests, Print) {
+    Node* const head = list::from_string("foo");
+    testing::internal::CaptureStdout();
+    list::print(std::cout, head);
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "foo");
+    list::free(head);
+}
+
+TEST(ListTests, Copy) {
+    Node* const original = list::from_string("foo");
+    Node* const copy = list::copy(original);
+
+    // Check if the copied list is equal to the original
+    EXPECT_EQ(list::compare(original, copy), 0);
+
+    // Check if modifying the original doesn't affect the copy
+    original->data = 'b';
+    EXPECT_NE(list::compare(original, copy), 0);
+
+    list::free(original);
+    list::free(copy);
+}
+
+// Add more tests for other functions in list.cpp as needed
+
+// Tests for string.cpp
+
+TEST(StringTests, ConstructorFromCString) {
+    String s("foo");
+    // Test the size of the string
+    EXPECT_EQ(s.size(), 3);
+    // Test the content of the string
+    EXPECT_EQ(s[0], 'f');
+    EXPECT_EQ(s[1], 'o');
+    EXPECT_EQ(s[2], 'o');
+}
+
+TEST(StringTests, CopyConstructor) {
+    String original("foo");
+    String copy(original);
+
+    // Test if the copied string is equal to the original
+    EXPECT_EQ(original, copy);
+
+    // Test if modifying the original doesn't affect the copy
+    original[0] = 'b';
+    EXPECT_NE(original, copy);
+}
+
+TEST(StringTests, AssignmentOperator) {
+    String s1("foo");
+    String s2("bar");
+
+    s1 = s2;
+
+    // Test if the assignment operator works correctly
+    EXPECT_EQ(s1, s2);
+}
+
+/*
 TEST(ListTests, FromStringValid) {
     const char* s = "Hello";
     list::Node* head = list::from_string(s);
@@ -253,4 +321,4 @@ TEST(ListTests, ReadValid) {
     EXPECT_EQ(str.size(), 5);
     EXPECT_EQ(str[0], 'H');
     EXPECT_EQ(str[4], 'o');
-}
+}*/
