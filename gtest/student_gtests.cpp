@@ -70,23 +70,23 @@ TEST(ListTests, CopyValid) {
     
     list::Node* listcopy = headcopy;
 
-    EXPECT_EQ(list->data, list_copy->data);
+    EXPECT_EQ(list->data, listcopy->data);
 
    list = list->next;
     listcopy = listcopy->next;
-        EXPECT_EQ(list->data, list_copy->data);
+        EXPECT_EQ(list->data, listcopy->data);
 
        list = list->next;
         listcopy = listcopy->next;
-        EXPECT_EQ(list->data, list_copy->data);
+        EXPECT_EQ(list->data, listcopy->data);
 
        list = list->next;
         listcopy = listcopy->next;
-        EXPECT_EQ(list->data, list_copy->data);
+        EXPECT_EQ(list->data, listcopy->data);
 
        list = list->next;
         listcopy = listcopy->next;
-        EXPECT_EQ(list->data, list_copy->data);
+        EXPECT_EQ(list->data, listcopy->data);
 
        list = list->next;
         listcopy = listcopy->next;
