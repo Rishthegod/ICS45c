@@ -202,3 +202,76 @@ TEST(ListTest, AppendEmptyLists) {
     list::Node* appended = list::append(head1, head2);
     EXPECT_EQ(appended, nullptr);
 }
+
+
+
+
+
+
+
+
+
+
+
+TEST(ListTest, FindListValid) {
+    list::Node* haystack = list::from_string("HelloWorld");
+    list::Node* needle = list::from_string("World");
+    list::Node* result = list::find_list(haystack, needle);
+    EXPECT_NE(result, nullptr);
+    EXPECT_EQ(result->data, 'W');
+    list::free(haystack);
+    list::free(needle);
+}
+
+TEST(ListTest, FindListNotFound) {
+    list::Node* haystack = list::from_string("HelloWorld");
+    list::Node* needle = list::from_string("Universe");
+    list::Node* result = list::find_list(haystack, needle);
+    EXPECT_EQ(result, nullptr);
+    list::free(haystack);
+    list::free(needle);
+}
+
+TEST(ListTest, FindListEmptyNeedle) {
+    list::Node* haystack = list::from_string("HelloWorld");
+    list::Node* needle = nullptr;
+    list::Node* result = list::find_list(haystack, needle);
+    EXPECT_EQ(result, nullptr);
+    list::free(haystack);
+}
+
+TEST(ListTest, FindListNullptrHaystack) {
+    list::Node* haystack = nullptr;
+    list::Node* needle = list::from_string("World");
+    list::Node* result = list::find_list(haystack, needle);
+    EXPECT_EQ(result, nullptr);
+    list::free(needle);
+}
+
+TEST(ListTest, FindListNullptrBoth) {
+    list::Node* haystack = nullptr;
+    list::Node* needle = nullptr;
+    list::Node* result = list::find_list(haystack, needle);
+    EXPECT_EQ(result, nullptr);
+}
+
+TEST(ListTest, FindCharValid) {
+    list::Node* haystack = list::from_string("HelloWorld");
+    list::Node* result = list::find_char(haystack, 'W');
+    EXPECT_NE(result, nullptr);
+    EXPECT_EQ(result->data, 'W');
+    list::free(haystack);
+}
+
+TEST(ListTest, FindCharNotFound) {
+    list::Node* haystack = list::from_string("HelloWorld");
+    list::Node* result = list::find_char(haystack, 'X');
+    EXPECT_EQ(result, nullptr);
+    list::free(haystack);
+}
+
+TEST(ListTest, FindCharInEmptyList) {
+    list::Node* haystack = nullptr;
+    list::Node* result = list::find_char(haystack, 'X');
+    EXPECT_EQ(result, nullptr);
+}
