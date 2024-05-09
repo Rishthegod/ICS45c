@@ -177,3 +177,34 @@ TEST(ListTest, IndexValid) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+TEST(ListTest, IndexInvalidNode) {
+    list::Node* head = list::from_string("Hello");
+    list::Node* node = new list::Node{'X', nullptr};
+    EXPECT_EQ(list::index(head, node), -1);
+    delete node;
+    list::free(head);
+}
+
+TEST(ListTest, LengthEmptyList) {
+    list::Node* head = nullptr;
+    EXPECT_EQ(list::length(head), 0);
+}
+
+TEST(ListTest, IndexOfCharNotFound) {
+    list::Node* head = list::from_string("Hello");
+    EXPECT_EQ(list::find_char(head, 'X'), -1);
+    list::free(head);
+}
+
+
