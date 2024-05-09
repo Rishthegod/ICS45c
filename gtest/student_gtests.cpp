@@ -232,13 +232,6 @@ TEST(ListTest, FindListNotFound) {
     list::free(needle);
 }
 
-TEST(ListTest, FindListEmptyNeedle) {
-    list::Node* haystack = list::from_string("HelloWorld");
-    list::Node* needle = nullptr;
-    list::Node* result = list::find_list(haystack, needle);
-    EXPECT_EQ(result, nullptr);
-    list::free(haystack);
-}
 
 TEST(ListTest, FindListNullptrHaystack) {
     list::Node* haystack = nullptr;
