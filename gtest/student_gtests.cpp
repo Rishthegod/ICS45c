@@ -68,7 +68,7 @@ TEST(ListTests, CopyValid) {
     
     list::Node* list = head;
     
-    list::Node* listcopy = head_copy;
+    list::Node* listcopy = headcopy;
 
     EXPECT_EQ(list->data, list_copy->data);
 
