@@ -61,13 +61,47 @@ TEST(ListTests, FreeNullptr) {
 
 
 TEST(ListTests, CopyValid) {
+
     list::Node* head = list::from_string("Hello");
-    list::Node* copy = list::copy(head);
-    std::stringstream ss;
-    list::print(ss, copy);
-    EXPECT_EQ(ss.str(), "Hello");
+    
+    list::Node* headcopy = list::copy(head);
+    
+    list::Node* list = head;
+    
+    list::Node* listcopy = head_copy;
+
+    EXPECT_EQ(list->data, list_copy->data);
+
+   list = list->next;
+    listcopy = listcopy->next;
+        EXPECT_EQ(list->data, list_copy->data);
+
+       list = list->next;
+        listcopy = listcopy->next;
+        EXPECT_EQ(list->data, list_copy->data);
+
+       list = list->next;
+        listcopy = listcopy->next;
+        EXPECT_EQ(list->data, list_copy->data);
+
+       list = list->next;
+        listcopy = listcopy->next;
+        EXPECT_EQ(list->data, list_copy->data);
+
+       list = list->next;
+        listcopy = listcopy->next;
+
+    
+
+    EXPECT_EQ(list, nullptr);
+
+    
+    EXPECT_EQ(listcopy, nullptr);
+
     list::free(head);
-    list::free(copy);
+    list::free(headcopy);
+
+
 }
 
 TEST(ListTests, CopyNullptr) {
@@ -104,9 +138,27 @@ TEST(ListTests, LengthNullptr) {
 TEST(ListTests, ReverseValid) {
     list::Node* head = list::from_string("Hello");
     list::Node* reversed = list::reverse(head);
+    list::Node* list = head;
+    list::Node* listcopy = reversed;
+
+    EXPECT_EQ(listcopy->data, "o");
+    listcopy = listcopy->next;
+    EXPECT_EQ(listcopy->data, "l");
+    listcopy = listcopy->next;
+    EXPECT_EQ(listcopy->data, "l");
+    listcopy = listcopy->next;
+    EXPECT_EQ(listcopy->data, "e");
+    listcopy = listcopy->next;
+    EXPECT_EQ(listcopy->data, "H");
+    
+
+    /*
     std::stringstream ss;
     list::print(ss, reversed);
-    EXPECT_EQ(ss.str(), "olleH");
+    EXPECT_EQ(ss.str(), "olleH");*/
+
+
+    
     list::free(head);
     list::free(reversed);
 }
