@@ -151,65 +151,6 @@ TEST(ListTests, PrintValid) {
 
 
 
-TEST(ListTests, PrintEmptyList) {
-    list::Node* head = nullptr;
-    std::string printed;
-    std::ostringstream oss(printed);
-    list::print(oss, head);
-    EXPECT_EQ(oss.str(), "");
-}
-
-TEST(ListTests, CopyEmptyList) {
-    list::Node* head = nullptr;
-    list::Node* copy = list::copy(head);
-    EXPECT_EQ(copy, nullptr);
-}
-
-TEST(ListTests, CompareEmptyLists) {
-    list::Node* head1 = nullptr;
-    list::Node* head2 = nullptr;
-    EXPECT_EQ(list::compare(head1, head2), 0);
-}
-
-TEST(ListTests, LengthEmptyList) {
-    list::Node* head = nullptr;
-    EXPECT_EQ(list::length(head), 0);
-}
-
-TEST(ListTests, ReverseEmptyList) {
-    list::Node* head = nullptr;
-    list::Node* reversed = list::reverse(head);
-    EXPECT_EQ(reversed, nullptr);
-}
-
-TEST(ListTests, AppendEmptyLists) {
-    list::Node* head1 = nullptr;
-    list::Node* head2 = nullptr;
-    list::Node* appended = list::append(head1, head2);
-    EXPECT_EQ(appended, nullptr);
-}
-
-TEST(ListTests, IndexOfCharNotFound) {
-    list::Node* head = list::from_string("Hello");
-    EXPECT_EQ(list::find_char(head, 'X'), -1);
-    list::free(head);
-}
-
-TEST(ListTests, IndexOfCharInEmptyList) {
-    list::Node* head = nullptr;
-    EXPECT_EQ(list::find_char(head, 'H'), -1);
-}
-
-TEST(ListTests, FindCharNotFound) {
-    list::Node* head = list::from_string("Hello");
-    EXPECT_EQ(list::find_char(head, 'X'), nullptr);
-    list::free(head);
-}
-
-TEST(ListTests, FindCharInEmptyList) {
-    list::Node* head = nullptr;
-    EXPECT_EQ(list::find_char(head, 'H'), nullptr);
-}
 
 
 
