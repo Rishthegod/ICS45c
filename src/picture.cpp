@@ -64,6 +64,7 @@ void Picture::print_all(std::ostream& out) const{
   ListNode *current = head; 
   while (current) { 
   current -> shape -> print(out);
+  current -> shape -> draw(out);
   current = current -> next;}
 }
 
@@ -87,12 +88,12 @@ double Picture::total_area() const{
 
 
 Picture::~Picture(){
-  ListNode *current = head; 
-  while (current) {
-      ListNode *temp = head;
-      current = current->next; 
-      delete temp->shape;
-      delete temp;
+
+  while (head) {
+      ListNode *temp = head -> next;
+      delete head->shape;
+      delete head;
+      head = temp;
     
   }
   
