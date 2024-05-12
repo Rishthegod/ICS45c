@@ -35,15 +35,50 @@ void Picture::swap(Picture &other){
   std::swap(tail, other.tail);
 }
 
+Picture &Picture::operator=(const Picture &other) {
+    if (this != &other) {
+        // Clear existing data
+        ListNode *current = head;
+        while (current) {
+            ListNode *temp = current;
+            current = current->next;
+            delete temp->shape;
+            delete temp;
+        }
+        head = nullptr;
+        tail = nullptr;
+
+        // Copy new data
+        ListNode *currentOther = other.head;
+        ListNode *prev = nullptr;
+        while (currentOther) {
+            ListNode *newNode = new ListNode{currentOther->shape->clone(), nullptr};
+            if (!head) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail->next = newNode;
+                tail = newNode;
+            }
+            currentOther = currentOther->next;
+        }
+    }
+    return *this;
+}
+
+
+/*
 Picture& Picture::operator=(const Picture &other){
+  
   if(this != &other){
     Picture temp(other);
     swap(temp);
   }
   return *this;
-}
+}*/
 
 Picture& Picture::operator=(Picture &&other){
+  
   swap(other);
   return *this;
 }
