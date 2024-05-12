@@ -4,7 +4,7 @@
 #include "shape.hpp"
 class Triangle : public Shape{
 public:
-Triangle(Point center, std::string name, int base, int height);
+Triangle(Point center, std::string name, double base, double height);
 
 
 double area() const override;
@@ -18,8 +18,8 @@ protected:
   Triangle(const Triangle& other) = default;
 
 private:
-  int base;
-  int height;
+  double base;
+  double height;
 
 // class Triangle
 };

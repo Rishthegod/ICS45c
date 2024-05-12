@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-Triangle::Triangle(Point center, std::string name, int base, int height): Shape(center, name), base(base), height(height){}
+Triangle::Triangle(Point center, std::string name, double base, double height): Shape(center, name), base(base), height(height){}
 
 double Triangle::area() const{
   double area = (base*height) / 2;
