@@ -36,6 +36,8 @@ void Picture::swap(Picture &other){
 }
 
 Picture &Picture::operator=(const Picture &other) {
+
+  // using swap for the copy assignment like I did for hw 3,4,5 was giving me sanitizer errors for some reason, so had to do it manually.
     if (this != &other) {
         // Clear existing data
         ListNode *current = head;
@@ -50,7 +52,7 @@ Picture &Picture::operator=(const Picture &other) {
 
         // Copy new data
         ListNode *currentOther = other.head;
-        ListNode *prev = nullptr;
+        
         while (currentOther) {
             ListNode *newNode = new ListNode{currentOther->shape->clone(), nullptr};
             if (!head) {
