@@ -7,7 +7,7 @@
 #include <utility>
 
 class Array{
-
+public:
   Array() : len{0}, buf{nullptr}{}
 
   explicit Array(int len): len{len}, buf{new int[len]}{
