@@ -10,8 +10,8 @@ public:
     Matrix() : rows{0}, cols{0} {}
     Matrix(int rows, int cols) : rows{rows}, cols{cols}, data{rows} {
         for (int i = 0; i < rows; ++i) {
-            Array<T> currentrow{cols};
-            data[i] = currentrow;
+            
+            data[i] = Array<T> currentrow{cols};
         }
     }
 
