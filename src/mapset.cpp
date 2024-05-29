@@ -13,29 +13,30 @@ std::string to_lowercase(const std::string& str) {
 }
 
 std::set<std::string> load_stopwords(std::istream& stopwords) {
-    std::set<std::string> stopwords_set;
-    std::string word;
-    while (stopwords >> word) {
-        stopwords_set.insert(to_lowercase(word));
-    }
-    return stopwords_set;
+    return std::ranges::istream_view<std::string>(stopwords)
+           | std::views::transform(to_lowercase)
+           | std::ranges::to<std::set>();
 }
 
 std::map<std::string, int> count_words(std::istream& document, const std::set<std::string>& stopwords) {
     std::map<std::string, int> word_count;
-    std::string line, word;
+    std::string content{std::istreambuf_iterator<char>(document), {}};
 
-    while (std::getline(document, line)) {
-        std::istringstream iss(line);
-        while (iss >> word) {
-            word = to_lowercase(word);
-            // Remove punctuation from the word
-            word.erase(std::remove_if(word.begin(), word.end(), ::ispunct), word.end());
-            if (!stopwords.contains(word) && !word.empty()) {
-                ++word_count[word];
-            }
+    auto words = content
+                 | std::views::transform([](unsigned char c) { return std::isalpha(c) ? std::tolower(c) : ' '; })
+                 | std::views::split(' ')
+                 | std::views::transform([](auto&& word_range) -> std::string {
+                       return std::string(word_range.begin(), word_range.end());
+                   })
+                 | std::views::remove_if([](const std::string& word) {
+                       return word.empty();
+                   });
+
+    std::ranges::for_each(words, [&](const std::string& word) {
+        if (!stopwords.contains(word)) {
+            ++word_count[word];
         }
-    }
+    });
 
     return word_count;
 }
