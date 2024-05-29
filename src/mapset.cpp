@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <ranges>
+#include <iterator>
 
 std::string to_lowercase(const std::string& str) {
     std::string result = str;
