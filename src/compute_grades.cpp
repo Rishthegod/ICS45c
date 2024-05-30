@@ -25,9 +25,9 @@ void Student::validate() const {
 
 void Student::compute_quiz_avg() {
     std::ranges::sort(quiz);
-    //auto minimum = quiz.begin()
+    
     if (quiz.size() > 1) {
-        //quiz.erase(quiz.begin());
+        
         quiz_avg = std::accumulate(quiz.begin()+1, quiz.end(), 0.0) / (quiz.size()-1);
     }
     else if(quiz.size() == 0){
@@ -37,17 +37,22 @@ void Student::compute_quiz_avg() {
         quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
     }
     
-    //quiz.insert(minimum);
+
 }
 
 void Student::compute_hw_avg() {
-    if (hw.size() == 0) {
+
+    if (hw.size() > 1){
+        hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) /hw.size();
+    }
+    else if(hw.size() == 0){
+    
         hw_avg = 0.0;
         
     }
     else{
         
-    hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) / hw.size();}
+    hw_avg = hw[0]; }
 }
 
 void Student::compute_course_score() {
@@ -59,22 +64,6 @@ void Student::compute_course_score() {
    
 }
 
-/*void Student::compute_letter_grade() {
-    static const std::vector<std::pair<int, std::string>> grade_boundaries = {
-        {97, "A+"}, {93, "A"}, {90, "A-"},
-        {87, "B+"}, {83, "B"}, {80, "B-"},
-        {77, "C+"}, {73, "C"}, {70, "C-"},
-        {67, "D+"}, {63, "D"}, {60, "D-"},
-        {0, "F"}
-    };
-
-    for (const auto& [min_score, grade] : grade_boundaries) {
-        if (course_score >= min_score) {
-            course_grade = grade;
-            break;
-        }
-    }
-}*/
 
 void Student::compute_grade() {
     compute_course_score();
