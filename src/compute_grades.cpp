@@ -23,10 +23,10 @@ void Student::validate() const {
 }
 
 void Student::compute_quiz_avg() {
-   
+    std::ranges::sort(quiz);
+    //auto minimum = quiz.begin()
     if (quiz.size() > 1) {
-        std::ranges::sort(quiz);
-        quiz.erase(quiz.begin());
+        //quiz.erase(quiz.begin());
         quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
     }
     else if(quiz.size() == 0){
@@ -36,8 +36,7 @@ void Student::compute_quiz_avg() {
         quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
     }
     
-
-    
+    //quiz.insert(minimum);
 }
 
 void Student::compute_hw_avg() {
