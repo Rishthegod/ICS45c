@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <cmath>
 
 void Student::validate() const {
     for (const auto& score : quiz) {
@@ -27,7 +28,7 @@ void Student::compute_quiz_avg() {
     //auto minimum = quiz.begin()
     if (quiz.size() > 1) {
         //quiz.erase(quiz.begin());
-        quiz_avg = std::accumulate(quiz.begin()+1, quiz.end(), 0.0) / quiz.size();
+        quiz_avg = std::accumulate(quiz.begin()+1, quiz.end(), 0.0) / (quiz.size()-1);
     }
     else if(quiz.size() == 0){
         quiz_avg = 0.0;
@@ -54,8 +55,8 @@ void Student::compute_course_score() {
     compute_hw_avg();
 
     double total = 0.4 * quiz_avg + 0.3 * hw_avg + 0.3 * final_score;
-    //course_score = static_cast<int>(std::round(total));
-    course_score = static_cast<int>(total);
+    course_score = static_cast<int>(std::round(total));
+   
 }
 
 /*void Student::compute_letter_grade() {
