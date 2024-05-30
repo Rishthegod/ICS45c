@@ -117,10 +117,10 @@ std::istream& operator>>(std::istream& in, Student& s) {
                 s.last_name += name_part;
             }
         } else if (keyword == "Quiz") {
-            //s.quiz.clear();
+            s.quiz.clear();
             std::copy(std::istream_iterator<int>(iss), std::istream_iterator<int>(), std::back_inserter(s.quiz));
         } else if (keyword == "HW") {
-            //s.hw.clear();
+            s.hw.clear();
             std::copy(std::istream_iterator<int>(iss), std::istream_iterator<int>(), std::back_inserter(s.hw));
         } else if (keyword == "Final") {
             iss >> s.final_score;
