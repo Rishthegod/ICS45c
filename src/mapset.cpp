@@ -5,6 +5,10 @@
 #include <sstream>
 #include <ranges>
 #include <iterator>
+#include <set>
+#include <map>
+#include <string_view>
+#include <vector>
 
 std::string to_lowercase(const std::string& str) {
     std::string result = str;
@@ -14,14 +18,28 @@ std::string to_lowercase(const std::string& str) {
 }
 
 std::set<std::string> load_stopwords(std::istream& stopwords) {
-    return std::ranges::istream_view<std::string>(stopwords)
-           | std::views::transform(to_lowercase)
-           | std::ranges::to<std::set>();
+    std::vector<std::string> words{std::istream_iterator<std::string>{stopwords},     std::istream_iterator<std::string>{}};
+    std::ranges::transform(words, words.begin(), to_lowercase);
+    return {words.begin(), words.end()};
 }
 
 std::map<std::string, int> count_words(std::istream& document, const std::set<std::string>& stopwords) {
     std::map<std::string, int> word_count;
-    std::string content{std::istreambuf_iterator<char>(document), {}};
+
+    std::transform(std::istream_iterator<std::string>{document}, std::istream_iterator<std::string>{},inserter(word_count, word_count.end()),[&](const std::string& word){
+        auto lowerword = to_lowercase(word);
+        if (stopwords.find(lowerword) == stopwords.end()){
+            return std::make_pair(lowerword, word_count[lowerword] + 1);
+        }
+        else{
+            return std::make_pair("", 0);
+        }});
+    if (word_count.find("") != word_count.end()){
+        word_count.erase("");
+    }
+    
+    return word_count;
+    /*std::string content{std::istreambuf_iterator<char>(document), {}};
 
     auto words = content
                  | std::views::transform([](unsigned char c) { return std::isalpha(c) ? std::tolower(c) : ' '; })
@@ -39,7 +57,7 @@ std::map<std::string, int> count_words(std::istream& document, const std::set<st
         }
     });
 
-    return word_count;
+    return word_count;*/
 }
 
 void output_word_counts(const std::map<std::string, int>& word_counts, std::ostream& output) {

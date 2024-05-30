@@ -23,26 +23,31 @@ void Student::validate() const {
 }
 
 void Student::compute_quiz_avg() {
-    if (quiz.empty()) {
-        quiz_avg = 0.0;
-        return;
-    }
-
+   
     if (quiz.size() > 1) {
         std::ranges::sort(quiz);
         quiz.erase(quiz.begin());
+        quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
     }
+    else if(quiz.size() == 0){
+        quiz_avg = 0.0;
+    }
+    else{
+        quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
+    }
+    
 
-    quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
+    
 }
 
 void Student::compute_hw_avg() {
-    if (hw.empty()) {
+    if (hw.size() == 0) {
         hw_avg = 0.0;
-        return;
+        
     }
+    else{
 
-    hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) / hw.size();
+    hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) / hw.size();}
 }
 
 void Student::compute_course_score() {
@@ -130,12 +135,12 @@ std::istream& operator>>(std::istream& in, Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Student& s) {
-    out << "Name:   " << s.first_name << " " << s.last_name << "\n"
+    out << "Name:   " << s.last_name << " " << s.first_name << "\n"
         << "HW Ave: " << static_cast<int>(s.hw_avg) << "\n"
         << "QZ Ave: " << static_cast<int>(s.quiz_avg) << "\n"
         << "Final:  " << static_cast<int>(s.final_score) << "\n"
         << "Total:  " << s.course_score << "\n"
-        << "Grade:  " << s.course_grade << "\n\n";
+        << "Grade:  " << s.course_grade << "\n";
 
     return out;
 }
@@ -166,7 +171,7 @@ std::istream& operator>>(std::istream& in, Gradebook& b) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Gradebook& b) {
-    copy(b.students.begin(), b.students.end(), std::ostream_iterator<Student>(out, ""));
+    copy(b.students.begin(), b.students.end(), std::ostream_iterator<Student>(out, "\n"));
     //copy(b.students.begin(), b.students.end(), std::ostream_iterator(out));
     /*for (const auto& student : b.students) {
         out << student;
