@@ -96,11 +96,16 @@ void Student::compute_grade() {
 }
 
 std::strong_ordering Student::operator<=>(const Student& other) const {
-    return std::tie(last_name, first_name) <=> std::tie(other.last_name, other.first_name);
-}
-
+    if(last_name == other.last_name){
+        return first_name <=> other.first_name;
+    }
+    return last_name <=> other.last_name;
+        
 bool Student::operator==(const Student& other) const {
-    return std::tie(last_name, first_name) == std::tie(other.last_name, other.first_name);
+    if(last_name == other.last_name && first_name == other.first_name){
+        return true;
+    }
+    return false;
 }
 
 std::istream& operator>>(std::istream& in, Student& s) {
