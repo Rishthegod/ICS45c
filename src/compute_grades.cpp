@@ -44,7 +44,7 @@ void Student::compute_hw_avg() {
 
     if (hw.size() > 1){
         
-        std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
+        std::copy(hw.begin(), hw.end(), std::ostream_iterator<int>(std::cout, " "));
         hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) /hw.size();
     }
     else if(hw.size() == 0){
@@ -117,10 +117,10 @@ std::istream& operator>>(std::istream& in, Student& s) {
                 s.last_name += name_part;
             }
         } else if (keyword == "Quiz") {
-            s.quiz.clear();
+            //s.quiz.clear();
             std::copy(std::istream_iterator<int>(iss), std::istream_iterator<int>(), std::back_inserter(s.quiz));
         } else if (keyword == "HW") {
-            s.hw.clear();
+            //s.hw.clear();
             std::copy(std::istream_iterator<int>(iss), std::istream_iterator<int>(), std::back_inserter(s.hw));
         } else if (keyword == "Final") {
             iss >> s.final_score;
