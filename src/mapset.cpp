@@ -29,13 +29,13 @@ std::map<std::string, int> count_words(std::istream& document, const std::set<st
     std::transform(std::istream_iterator<std::string>{document}, std::istream_iterator<std::string>{},inserter(word_count, word_count.end()),[&](const std::string& word){
         auto lowerword = to_lowercase(word);
         if (stopwords.find(lowerword) == stopwords.end()){
-            return std::make_pair(lowerword, word_count[lowerword] + 1);
+            return std::make_pair(std::string(lowerword), word_count[std::string(lowerword)] + 1);
         }
         else{
-            return std::make_pair("", 0);
+            return std::make_pair(std::string(""), 0);
         }});
-    if (word_count.find("") != word_count.end()){
-        word_count.erase("");
+    if (word_count.find(std::string("")) != word_count.end()){
+        word_count.erase(std::string(""));
     }
     
     return word_count;
