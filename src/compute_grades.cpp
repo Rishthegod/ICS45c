@@ -43,10 +43,12 @@ void Student::compute_quiz_avg() {
 void Student::compute_hw_avg() {
 
     if (hw.size() > 1){
+        
+        std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
         hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) /hw.size();
     }
     else if(hw.size() == 0){
-    
+        
         hw_avg = 0.0;
         
     }
