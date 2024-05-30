@@ -27,7 +27,7 @@ void Student::compute_quiz_avg() {
     //auto minimum = quiz.begin()
     if (quiz.size() > 1) {
         //quiz.erase(quiz.begin());
-        quiz_avg = std::accumulate(quiz.begin(), quiz.end(), 0.0) / quiz.size();
+        quiz_avg = std::accumulate(quiz.begin()+1, quiz.end(), 0.0) / quiz.size();
     }
     else if(quiz.size() == 0){
         quiz_avg = 0.0;
@@ -45,7 +45,7 @@ void Student::compute_hw_avg() {
         
     }
     else{
-
+        
     hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) / hw.size();}
 }
 
@@ -117,12 +117,12 @@ std::istream& operator>>(std::istream& in, Student& s) {
         iss >> keyword;
 
         if (keyword == "Name") {
-            s.first_name = "";
-            iss >> s.last_name;
+            s.last_name = "";
+            iss >> s.first_name;
             std::string name_part;
             while (iss >> name_part) {
-                if (!s.first_name.empty()) s.first_name += " ";
-                s.first_name += name_part;
+                if (!s.last_name.empty()){ s.last_name += " ";}
+                s.last_name += name_part;
             }
         } else if (keyword == "Quiz") {
             s.quiz.clear();
@@ -139,7 +139,7 @@ std::istream& operator>>(std::istream& in, Student& s) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Student& s) {
-    out << "Name:   " << s.last_name << " " << s.first_name << "\n"
+    out << "Name:   " << s.first_name << " " << s.last_name << "\n"
         << "HW Ave: " << static_cast<int>(s.hw_avg) << "\n"
         << "QZ Ave: " << static_cast<int>(s.quiz_avg) << "\n"
         << "Final:  " << static_cast<int>(s.final_score) << "\n"
