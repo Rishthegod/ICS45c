@@ -41,20 +41,14 @@ void Student::compute_quiz_avg() {
 }
 
 void Student::compute_hw_avg() {
+    if (hw.size() >= 1){
 
-    if (hw.size() > 1){
-        
-        std::copy(hw.begin(), hw.end(), std::ostream_iterator<int>(std::cout, " "));
+        //std::copy(hw.begin(), hw.end(), std::ostream_iterator<int>(std::cout, " "));
         hw_avg = std::accumulate(hw.begin(), hw.end(), 0.0) /hw.size();
     }
-    else if(hw.size() == 0){
-        
-        hw_avg = 0.0;
-        
-    }
     else{
-        
-    hw_avg = hw[0]; }
+        hw_avg = 0.0;
+    }
 }
 
 void Student::compute_course_score() {
